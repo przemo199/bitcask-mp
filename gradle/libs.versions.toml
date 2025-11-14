@@ -1,0 +1,14 @@
+[versions]
+kotlin = "2.2.20"
+kotlinx-atomicfu = "0.30.0-beta"
+
+[libraries]
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+kotlin-logging = { module = "io.github.oshai:kotlin-logging", version = "7.0.13" }
+kotlinx-io-core = { module = "org.jetbrains.kotlinx:kotlinx-io-core", version = "0.8.0" }
+logging-log4j = { module = "org.apache.logging.log4j:log4j-slf4j2-impl", version = "2.25.0" }
+
+[plugins]
+kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+vanniktech-mavenPublish = { id = "com.vanniktech.maven.publish", version = "0.30.0" }
+kotlinx-atomicfu = { id = "org.jetbrains.kotlinx.atomicfu", version.ref = "kotlinx-atomicfu" }
