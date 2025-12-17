@@ -20,3 +20,6 @@ val bitcask = BitcaskKt(Path("/bitcask-dir"))
 val value = bticask.get("key")
 assertEquals("value", value.decodeToString())
 ```
+
+> **_NOTE:_** This library attempts to make bitcask implementation compatible with ```Map<String, ByteArray>``` interface,
+> but some operations may be slow, especially those involving datasets with values of the same length.

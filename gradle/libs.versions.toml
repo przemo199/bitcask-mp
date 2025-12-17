@@ -1,11 +1,11 @@
 [versions]
-kotlin = "2.2.20"
+kotlin = "2.3.0"
 kotlinx-atomicfu = "0.30.0-beta"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-logging = { module = "io.github.oshai:kotlin-logging", version = "7.0.13" }
-kotlinx-io-core = { module = "org.jetbrains.kotlinx:kotlinx-io-core", version = "0.8.0" }
+kotlinx-io-core = { module = "org.jetbrains.kotlinx:kotlinx-io-core", version = "0.8.2" }
 logging-log4j = { module = "org.apache.logging.log4j:log4j-slf4j2-impl", version = "2.25.0" }
 
 [plugins]

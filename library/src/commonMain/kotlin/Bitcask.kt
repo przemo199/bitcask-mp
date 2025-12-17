@@ -19,7 +19,6 @@ interface Bitcask : Map<String, ByteArray> {
  * Mutable Bitcask interface
  */
 interface MutableBitcask : Bitcask, MutableMap<String, ByteArray>, AutoCloseable {
-
     /**
      * Associates the specified [value] with the specified [key]
      */
@@ -33,7 +32,7 @@ interface MutableBitcask : Bitcask, MutableMap<String, ByteArray>, AutoCloseable
     fun delete(key: String)
 
     /**
-     * Compacts the data files on disk by writing current statue of Bitcask and deleting old files
+     * Compacts the data files on disk by writing the current state of Bitcask and deleting old files
      */
     fun merge()
 
