@@ -5,7 +5,6 @@ import kotlinx.io.Sink
 import kotlinx.io.Source
 import kotlinx.io.files.Path
 import kotlinx.io.readString
-import kotlin.io.encoding.Base64.Default.encodeToByteArray
 
 /**
  * Metadata of a record stored in a data file

@@ -5,7 +5,6 @@ import kotlinx.io.IOException
 import kotlinx.io.buffered
 import kotlinx.io.files.Path
 import kotlin.time.Clock
-import kotlin.time.ExperimentalTime
 
 /**
  * Represents a file to which [BitcaskRecord]s can be written
@@ -13,7 +12,6 @@ import kotlin.time.ExperimentalTime
  * @param directory directory in which the file will be created
  * @param config Bitcask configuration
  */
-@OptIn(ExperimentalTime::class)
 data class WriteFile
 @Throws(IOException::class)
 constructor(val directory: Path, val config: BitcaskConfig) : AutoCloseable {

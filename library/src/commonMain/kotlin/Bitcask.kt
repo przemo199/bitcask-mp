@@ -6,7 +6,7 @@ package com.github.przemo199.bitcask
 interface Bitcask : Map<String, ByteArray> {
     /**
      * Accumulates value starting with [initial] value and applying [operation]
-     * to current accumulator value and each element.
+     * to the current accumulator value and each element.
      *
      * Returns the specified [initial] value if the sequence is empty.
      *

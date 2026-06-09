@@ -2,10 +2,8 @@ package com.github.przemo199.bitcask
 
 import kotlinx.io.Buffer
 import kotlin.time.Clock
-import kotlin.time.ExperimentalTime
 
 object Utils {
-    @OptIn(ExperimentalTime::class)
     fun timestamp(): Int {
         return (Clock.System.now().toEpochMilliseconds() / 1000L).toInt()
     }
