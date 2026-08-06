@@ -61,7 +61,7 @@ class BitcaskKtTest {
     fun bitcaskCorrectlyResolvesAbsoluteDirectory() {
         TemporaryTestDir().use {
             val bitcask = BitcaskKt(it.path)
-            assertEquals(SystemFileSystem.resolve(Path(it.path)), bitcask.absoluteDirectory)
+            assertEquals(SystemFileSystem.resolve(Path(it.path)), bitcask.absolutePath)
         }
     }
 }

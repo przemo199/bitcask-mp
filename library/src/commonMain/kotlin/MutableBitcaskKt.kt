@@ -16,7 +16,7 @@ open class MutableBitcaskKt(directory: Path, config: BitcaskConfig = BitcaskConf
     BitcaskKt(directory, config), MutableBitcask {
 
     init {
-        LockedDirs.verifyAndAdd(absoluteDirectory)
+        LockedDirs.verifyAndAdd(absolutePath)
     }
 
     private var writeFile: WriteFile = WriteFile(directory, config)
@@ -29,7 +29,7 @@ open class MutableBitcaskKt(directory: Path, config: BitcaskConfig = BitcaskConf
     fun createNewWriteFile() {
         writeFile.flush()
         writeFile.close()
-        writeFile = WriteFile(absoluteDirectory, config)
+        writeFile = WriteFile(absolutePath, config)
     }
 
     override fun set(key: String, value: ByteArray) {
@@ -246,8 +246,8 @@ open class MutableBitcaskKt(directory: Path, config: BitcaskConfig = BitcaskConf
         ?.value
 
     protected fun createHintfile() {
-        val hintfilePath = Path(absoluteDirectory, "hintfile.dat")
-        val oldHintfile = Path(absoluteDirectory, "hintfile-old.dat")
+        val hintfilePath = Path(absolutePath, "hintfile.dat")
+        val oldHintfile = Path(absolutePath, "hintfile-old.dat")
         if (config.fileSystem.exists(hintfilePath)) {
             config.fileSystem.source(hintfilePath).buffered().use { source ->
                 config.fileSystem.sink(oldHintfile).buffered().use {
@@ -271,11 +271,11 @@ open class MutableBitcaskKt(directory: Path, config: BitcaskConfig = BitcaskConf
         writeFile.flush()
         writeFile.close()
         createHintfile()
-        LockedDirs.remove(absoluteDirectory)
+        LockedDirs.remove(absolutePath)
     }
 
     companion object {
-        private val LOCKED_DIRS: MutableSet<Path> = mutableSetOf()
+        private val LOCKED_DIRS = mutableSetOf<Path>()
 
         private object LockedDirs {
             private val lock = ReentrantLock()

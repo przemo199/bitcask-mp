@@ -41,11 +41,9 @@ data class BitcaskRecord(
         timestamp
     )
 
-    fun toSource(): Source {
-        return Buffer().apply {
-            writeInt(crc32)
-            bufferWithoutCrc32.copyTo(this)
-        }
+    fun toSource(): Source = Buffer().apply {
+        writeInt(crc32)
+        bufferWithoutCrc32.copyTo(this)
     }
 
     fun toByteArray(): ByteArray = Buffer().also(::writeTo).readByteArray()

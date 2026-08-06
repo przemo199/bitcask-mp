@@ -13,20 +13,20 @@ private val logger = KotlinLogging.logger {}
 /**
  * Kotlin Multiplatform implementation of Bitcask key/value store
  *
- * @param directory directory where data files will be read from
+ * @param path directory where data files will be read from
  * @param config configuration of the Bitcask instance
  */
 open class BitcaskKt(
-    directory: Path,
+    path: Path,
     val config: BitcaskConfig = BitcaskConfig()
 ) : Bitcask {
     protected val keyDirectory: KeyDirectory
-    val absoluteDirectory: Path
+    val absolutePath: Path
 
     init {
-        config.fileSystem.createDirectories(directory)
-        absoluteDirectory = config.fileSystem.resolve(directory)
-        keyDirectory = KeyDirectories.getOrPut(absoluteDirectory, ::loadKeyDirectory)
+        config.fileSystem.createDirectories(path)
+        absolutePath = config.fileSystem.resolve(path)
+        keyDirectory = KeyDirectories.getOrPut(absolutePath, ::loadKeyDirectory)
     }
 
     /**
@@ -146,21 +146,21 @@ open class BitcaskKt(
     }
 
     protected fun loadRecordSource(metadata: RecordMetadata): Source {
-        val filePath = Path(absoluteDirectory, metadata.fileName.name)
+        val filePath = Path(absolutePath, metadata.fileName.name)
         return config.fileSystem.source(filePath).buffered().also {
             it.skip(metadata.recordPosition.toLong())
             it.require(metadata.recordSize.toLong())
         }
     }
 
-    protected fun getSortedDataFiles(): List<Path> = config.fileSystem.list(absoluteDirectory)
+    protected fun getSortedDataFiles(): List<Path> = config.fileSystem.list(absolutePath)
         .filter {
             it.name.endsWith(config.dataFileSuffix) && config.fileSystem.metadataOrNull(it)?.isRegularFile == true
         }
         .sortedBy(Path::name)
 
     private fun loadKeyDirectory(): KeyDirectory {
-        val hintfilePath = Path(absoluteDirectory, "hintfile.dat")
+        val hintfilePath = Path(absolutePath, "hintfile.dat")
         if (config.fileSystem.metadataOrNull(hintfilePath)?.isRegularFile == true) {
             logger.info { "Found hintfile, rebuilding key directory" }
             try {
