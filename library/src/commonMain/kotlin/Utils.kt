@@ -5,7 +5,7 @@ import kotlin.time.Clock
 
 object Utils {
     fun timestamp(): Int {
-        return (Clock.System.now().toEpochMilliseconds() / 1000L).toInt()
+        return (Clock.System.now().toEpochMilliseconds()).toInt()
     }
 
     @OptIn(ExperimentalUnsignedTypes::class)

@@ -66,7 +66,7 @@ open class MutableBitcaskKt(directory: Path, config: BitcaskConfig = BitcaskConf
     override fun merge() {
         val oldDataFiles = getSortedDataFiles()
         createNewWriteFile()
-        keys.forEach { saveRecord(getRecord(it)!!) }
+        keys.forEach { getRecord(it)?.let(::saveRecord) }
         oldDataFiles.forEach(config.fileSystem::delete)
         createHintfile()
     }

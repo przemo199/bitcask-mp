@@ -74,7 +74,7 @@ mavenPublishing {
 
     coordinates(
         groupId = group.toString(),
-        artifactId = "library",
+        artifactId = "bitcask-mp",
         version = version.toString()
     )
 
